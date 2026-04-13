@@ -1,0 +1,3 @@
+[submodule "app/src/main/zstd"]
+	path = app/src/main/zstd
+	url = https://github.com/luben/zstd-jni
