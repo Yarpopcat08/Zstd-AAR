@@ -14,7 +14,7 @@ jobs:
           fetch-depth: 0
           submodules: recursive
       - name: Build
-        run: ./gradlew :app:assemble
+        run: ./gradlew :app:assembleRelease
       - name: Upload AAR
         uses: actions/upload-artifact@v4
         with:
