@@ -18,6 +18,6 @@ jobs:
       - name: Upload AAR
         uses: actions/upload-artifact@v4
         with:
-          name: zstd-release.aar
+          name: zstd-release
           path: app/build/outputs/aar/app-release.aar
 
