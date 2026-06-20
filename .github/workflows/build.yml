@@ -13,8 +13,10 @@ jobs:
         with:
           fetch-depth: 0
           submodules: recursive
-      - name: Move dh_jni_forwarder.c
-        run: mv ./dh_jni_forwarder.c ./app/src/main/zstd/src/main/native/
+      - name: Move dh_jni_forwarder
+        run: mv ./dhjni ./app/src/main/zstd/src/main/native/
+      - name: Add dhjni folder to CMake
+        run: git apply ./CMakeLists.patch
       - name: Build
         run: ./gradlew :app:assembleRelease
       - name: Upload AAR

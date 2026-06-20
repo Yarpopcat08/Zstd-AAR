@@ -1,4 +1,12 @@
 #include <jni.h>
+#include <jni_bufferdecompress_zstd.h>
+#include <jni_directbuffercompress_zstd.h>
+#include <jni_directbufferdecompress_zstd.h>
+#include <jni_fast_zstd.h>
+#include <jni_inputstream_zstd.h>
+#include <jni_outputstream_zstd.h>
+#include <jni_zdict.h>
+#include <jni_zstd.h>
 // Forwards DH renamed functions back to zstd-jni ones.
 // Used because DH 2.4.4 uses the normal zstd-jni ones, newer ones rename to dhcomgithubluben.
 #define FORWARD_TO_DH_NOJNI(ret, name, decl, call) \
