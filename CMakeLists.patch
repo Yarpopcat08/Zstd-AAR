@@ -1,5 +1,5 @@
---- a/Zstd/app/src/main/zstd/CMakeLists.txt
-+++ b/Zstd/app/src/main/zstd/CMakeLists.txt
+--- a/app/src/main/zstd/CMakeLists.txt
++++ b/app/src/main/zstd/CMakeLists.txt
 @@ -7,7 +7,7 @@
  cmake_minimum_required(VERSION 3.5)
  include(CheckCCompilerFlag)
