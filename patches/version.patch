@@ -1,7 +1,5 @@
-diff --git a/version b/version
-index c507cb2..12092c1 100644
---- a/version
-+++ b/version
+--- a/app/src/main/zstd/version
++++ b/app/src/main/zstd/version
 @@ -1 +1 @@
 -1.5.7-7
 +1.5.7-6

@@ -1,7 +1,5 @@
-diff --git a/CMakeLists.txt b/CMakeLists.txt
-index e000402..ec7db59 100644
---- a/CMakeLists.txt
-+++ b/CMakeLists.txt
+--- a/app/src/main/zstd/CMakeLists.txt
++++ b/app/src/main/zstd/CMakeLists.txt
 @@ -3,12 +3,12 @@ include(CheckCCompilerFlag)
  project(zstd-jni C ASM)
  file(STRINGS "version" NATIVE_VERSION)
