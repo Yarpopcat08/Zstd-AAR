@@ -11,7 +11,7 @@
  endif (JNI_FOUND)
  file(GLOB_RECURSE SOURCES RELATIVE ${CMAKE_SOURCE_DIR} "src/*.[cS]")
 -add_library(zstd-jni-${NATIVE_VERSION} SHARED ${SOURCES})
-+add_library(zstd-dh-jni_dh-${NATIVE_VERSION} SHARED ${SOURCES})
++add_library(zstd-jni_dh-${NATIVE_VERSION} SHARED ${SOURCES})
  add_definitions("-DZSTD_MULTITHREAD=1")
  add_definitions("-DZSTD_LEGACY_SUPPORT=4")
  CHECK_C_COMPILER_FLAG(-Oz COMPILER_SUPPORTS_OZ)
