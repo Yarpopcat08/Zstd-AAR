@@ -16,7 +16,9 @@ jobs:
       - name: Move dh_jni_forwarder
         run: mv ./dhjni ./app/src/main/zstd/src/main/native/
       - name: Add dhjni folder to CMake
-        run: git apply ./CMakeLists.patch
+        run: git apply ./patches/CMakeLists.patch
+      - name: Change version for DH
+        run: git apply ./patches/version.patch
       - name: Build
         run: ./gradlew :app:assembleRelease
       - name: Upload AAR
