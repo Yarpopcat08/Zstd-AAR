@@ -1,8 +1,8 @@
---- a/app/src/main/zstd/CMakeLists.txt
-+++ b/app/src/main/zstd/CMakeLists.txt
-@@ -7,7 +7,7 @@
- cmake_minimum_required(VERSION 3.5)
- include(CheckCCompilerFlag)
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index e000402..ec7db59 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -3,12 +3,12 @@ include(CheckCCompilerFlag)
  project(zstd-jni C ASM)
  file(STRINGS "version" NATIVE_VERSION)
  find_package(JNI)
@@ -11,3 +11,9 @@
  if (JNI_FOUND)
      include_directories(${JNI_INCLUDE_DIRS})
  endif (JNI_FOUND)
+ file(GLOB_RECURSE SOURCES RELATIVE ${CMAKE_SOURCE_DIR} "src/*.[cS]")
+-add_library(zstd-jni-${NATIVE_VERSION} SHARED ${SOURCES})
++add_library(zstd-dh-jni_dh-${NATIVE_VERSION} SHARED ${SOURCES})
+ add_definitions("-DZSTD_MULTITHREAD=1")
+ add_definitions("-DZSTD_LEGACY_SUPPORT=4")
+ CHECK_C_COMPILER_FLAG(-Oz COMPILER_SUPPORTS_OZ)
