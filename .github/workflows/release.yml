@@ -15,8 +15,13 @@ jobs:
           submodules: recursive
       - name: Build
         run: ./gradlew :app:assembleRelease
-      - name: mv artifact
+      - name: Rename artifact
         run: mv app/build/outputs/aar/app-release.aar app/build/outputs/aar/zstd-release.aar
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: zstd-vanilla
+          path: app/build/outputs/aar/zstd-release.aar
 
   build-dh:
     name: Build ZSTD for DH
@@ -35,26 +40,38 @@ jobs:
         run: git apply ./patches/version.patch
       - name: Build
         run: ./gradlew :app:assembleRelease
-      - name: mv artifact
+      - name: Rename artifact
         run: mv app/build/outputs/aar/app-release.aar app/build/outputs/aar/zstd-dh-release.aar
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: zstd-dh
+          path: app/build/outputs/aar/zstd-dh-release.aar
 
   release:
     name: Release
     needs: [build-vanilla, build-dh]
-    if: github.repository_owner == 'MojoLauncher' && github.ref_name == 'v3_openjdk'
-    uses: softprops/action-gh-release@v3
-    with:
-      name: ZSTD-AAR Release
-      tag_name: Release
-      body: |
-        ## ZSTD AAR release builds. 
-        To download click on **▶Assets**, then choose the file you wish to download.
-  
-        >Vanilla ZSTD build: `zstd-release.aar`<br>
-        >DH renamed ZSTD build: `zstd-dh-release.aar`
-
-        Commit hash: ${{ github.sha }}
-      files: |
-        app/build/outputs/aar/zstd-release.aar
-        app/build/outputs/aar/zstd-dh-release.aar
+    if: github.ref_name == 'master'
+    runs-on: ubuntu-latest
+    steps:
+        - name: Download artifacts
+          uses: actions/download-artifact@v4
+          with:
+            path: out/
+        - name: Upload Releases
+          uses: softprops/action-gh-release@v3
+          with:
+            name: ZSTD-AAR Release
+            tag_name: zstd-release-$(date +'%Y%m%d-%H%M%S')
+            body: |
+              ## ZSTD AAR release builds. 
+              To download click on **▶Assets**, then choose the file you wish to download.
+              
+              >Vanilla ZSTD build: `zstd-release.aar`<br>
+              >DH renamed ZSTD build: `zstd-dh-release.aar`
+              
+              Commit hash: ${{ github.sha }}
+            files: |
+              out/zstd-release.aar
+              out/zstd-dh-release.aar
 
