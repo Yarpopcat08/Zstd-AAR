@@ -1,0 +1,60 @@
+name: Build and Release all flavours
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-vanilla:
+    name: Build vanilla ZSTD
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          submodules: recursive
+      - name: Build
+        run: ./gradlew :app:assembleRelease
+      - name: mv artifact
+        run: mv app/build/outputs/aar/app-release.aar app/build/outputs/aar/zstd-release.aar
+
+  build-dh:
+    name: Build ZSTD for DH
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          submodules: recursive
+      - name: Rename for DH
+        run: bash ./renamer.sh
+      - name: Apply CMake patches
+        run: git apply ./patches/CMakeLists.patch
+      - name: Change version for DH
+        run: git apply ./patches/version.patch
+      - name: Build
+        run: ./gradlew :app:assembleRelease
+      - name: mv artifact
+        run: mv app/build/outputs/aar/app-release.aar app/build/outputs/aar/zstd-dh-release.aar
+
+  release:
+    name: Release
+    needs: [build-vanilla, build-dh]
+    if: github.repository_owner == 'MojoLauncher' && github.ref_name == 'v3_openjdk'
+    uses: softprops/action-gh-release@v3
+    with:
+      name: ZSTD-AAR Release
+      tag_name: Release
+      body: |
+        ## ZSTD AAR release builds. 
+        To download click on **▶Assets**, then choose the file you wish to download.
+  
+        >Vanilla ZSTD build: `zstd-release.aar`<br>
+        >DH renamed ZSTD build: `zstd-dh-release.aar`
+
+        Commit hash: ${{ github.sha }}
+      files: |
+        app/build/outputs/aar/zstd-release.aar
+        app/build/outputs/aar/zstd-dh-release.aar
+
