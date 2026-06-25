@@ -64,11 +64,10 @@ jobs:
         - name: Upload Releases
           uses: softprops/action-gh-release@v3
           with:
-            name: ZSTD-AAR Release ${{ github.run_number }}
-            tag_name: zstd-aar-release-${{ github.run_number }}
+            name: ZSTD AAR Release ${{ github.run_number }}
+            tag_name: zstd-aar-release-${{ github.sha }}
             body: |
-              ## ZSTD AAR release builds. 
-              To download click on **▶Assets**, then choose the file you wish to download. You will need to unzip it to get the AAR.
+              To download the artifact click on **▶Assets**, then choose the file you wish to download.
               
               >Vanilla ZSTD build: `zstd-vanilla`<br>
               >DH renamed ZSTD build: `zstd-dh`
