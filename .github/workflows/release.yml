@@ -3,6 +3,9 @@ name: Build and Release all flavours
 on:
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   build-vanilla:
     name: Build vanilla ZSTD
@@ -72,6 +75,6 @@ jobs:
               
               Commit hash: ${{ github.sha }}
             files: |
-              out/zstd-vanilla
-              out/zstd-dh
+              out/zstd-vanilla/*
+              out/zstd-dh/*
 
