@@ -16,6 +16,13 @@ jobs:
         with:
           fetch-depth: 0
           submodules: recursive
+      - name: Set up JDK 8
+        uses: actions/setup-java@v4
+        with:
+          java-version: '8'
+          distribution: 'temurin'
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
       - name: Build
         run: ./gradlew :app:assembleRelease
       - name: Rename artifact
@@ -35,6 +42,13 @@ jobs:
         with:
           fetch-depth: 0
           submodules: recursive
+      - name: Set up JDK 8
+        uses: actions/setup-java@v4
+        with:
+          java-version: '8'
+          distribution: 'temurin'
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
       - name: Rename for DH
         run: bash ./renamer.sh
       - name: Apply CMake patches
@@ -57,6 +71,10 @@ jobs:
     if: github.ref_name == 'master'
     runs-on: ubuntu-latest
     steps:
+        - name: Set envs
+          run: |
+            echo "TIME=$(date --rfc-3339=date)" >> $GITHUB_ENV
+            echo "SHORT_SHA=${GITHUB_SHA::7}" >> $GITHUB_ENV
         - name: Download artifacts
           uses: actions/download-artifact@v4
           with:
@@ -64,8 +82,8 @@ jobs:
         - name: Upload Releases
           uses: softprops/action-gh-release@v3
           with:
-            name: ZSTD AAR Release ${{ github.run_number }}
-            tag_name: zstd-aar-release-${{ github.sha }}
+            name: ZSTD AAR Release ${{ env.TIME }}
+            tag_name: zstd-aar-release-${{ env.SHORT_SHA }}
             body: |
               To download the artifact click on **▶Assets**, then choose the file you wish to download.
               
