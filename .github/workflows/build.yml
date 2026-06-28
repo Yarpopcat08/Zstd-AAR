@@ -1,4 +1,4 @@
-name: Build vanilla ZSTD
+name: Build ZSTD
 
 on:
   push:
@@ -13,11 +13,47 @@ jobs:
         with:
           fetch-depth: 0
           submodules: recursive
+      - name: Set up JDK 8
+        uses: actions/setup-java@v5
+        with:
+          java-version: '8'
+          distribution: 'temurin'
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v6
       - name: Build
         run: ./gradlew :app:assembleRelease
       - name: Upload AAR
         uses: actions/upload-artifact@v4
         with:
           name: zstd-release
+          path: app/build/outputs/aar/app-release.aar
+
+  build-dh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          submodules: recursive
+      - name: Set up JDK 8
+        uses: actions/setup-java@v5
+        with:
+          java-version: '8'
+          distribution: 'temurin'
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v6
+      - name: Rename for DH
+        run: bash ./renamer.sh
+      - name: Apply CMake patches
+        run: git apply ./patches/CMakeLists.patch
+      - name: Change version for DH
+        run: git apply ./patches/version.patch
+      - name: Build
+        run: ./gradlew :app:assembleRelease
+      - name: Upload AAR
+        uses: actions/upload-artifact@v4
+        with:
+          name: zstd-dh-release
           path: app/build/outputs/aar/app-release.aar
 
