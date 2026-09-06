@@ -51,8 +51,6 @@ jobs:
         run: bash ./renamer.sh
       - name: Apply CMake patches
         run: git apply ./patches/CMakeLists.patch
-      - name: Change version for DH
-        run: git apply ./patches/version.patch
       - name: Build
         run: ./gradlew :app:assembleRelease
       - name: Upload AAR
