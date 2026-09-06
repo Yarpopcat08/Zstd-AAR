@@ -25,7 +25,7 @@ android {
             externalNativeBuild {
                 cmake {
                     arguments "-DCMAKE_BUILD_TYPE=Release"
-                    cppFlags "--version-script=./libzstd-jni.so.map -Wl,-Bsymbolic -Wl,-z,relro,-z,now -shared -flto"
+                    cppFlags "--version-script=./libzstd-jni.so.map -Wl,-Bsymbolic -Wl, -shared -flto"
                 }
             }
         }
