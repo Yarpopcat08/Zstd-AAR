@@ -1,4 +1,4 @@
-name: Build and Release all flavours
+name: Release all flavours
 
 on:
   workflow_dispatch:
@@ -35,6 +35,6 @@ jobs:
               
               Commit hash: ${{ github.sha }}
             files: |
-              out/zstd-vanilla/*
-              out/zstd-dh/*
+              out/zstd-release/*
+              out/zstd-dh-release/*
 
