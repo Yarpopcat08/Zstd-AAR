@@ -22,6 +22,10 @@ jobs:
               branch: master
               workflow_conclusion: success
               path: out/
+        - name: Rename
+          run: |
+            mv ./out/zstd-release/app-release.aar ./out/zstd-release/zstd-vanilla.aar
+            mv ./out/zstd-dh-release/app-release.aar ./out/zstd-release/zstd-dh.aar
         - name: Upload Releases
           uses: softprops/action-gh-release@v3
           with:
