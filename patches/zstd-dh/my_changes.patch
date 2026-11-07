@@ -1,7 +1,7 @@
-diff --git a/CMakeLists.txt b/CMakeLists.txt
+diff --git a/app/src/main/zstd/CMakeLists.txt b/app/src/main/zstd/CMakeLists.txt
 index 37d9cdd..8604381 100644
---- a/CMakeLists.txt
-+++ b/CMakeLists.txt
+--- a/app/src/main/zstd/CMakeLists.txt
++++ b/app/src/main/zstd/CMakeLists.txt
 @@ -1,18 +1,30 @@
  cmake_minimum_required(VERSION 3.5)
  include(CheckCCompilerFlag)
