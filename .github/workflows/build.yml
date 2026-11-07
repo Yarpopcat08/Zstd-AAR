@@ -21,7 +21,7 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v6
       - name: Apply breaker patch
-        run: pushd ./app/src/main/zstd; git apply --verbose --ignore-space-change --ignore-whitespace ../../../../patches/break_droidcringe.patch; popd
+        run: pushd ./app/src/main/zstd; git apply --verbose --ignore-space-change --ignore-whitespace ../../../../patches/zstd-dh/break_droidcringe.patch; popd
       - name: Build
         run: ./gradlew :app:assembleRelease
       - name: Upload AAR
@@ -46,11 +46,11 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v6
       - name: Apply breaker patch
-        run: pushd ./app/src/main/zstd; git apply --verbose --ignore-space-change --ignore-whitespace ../../../../patches/break_droidcringe.patch; popd
+        run: pushd ./app/src/main/zstd; git apply --verbose --ignore-space-change --ignore-whitespace ../../../../patches/zstd-dh/break_droidcringe.patch; popd
       - name: Rename for DH
-        run: bash ./renamer.sh
+        run: bash ./patches/zstd-dh/renamer.sh
       - name: Apply CMake patches
-        run: git apply ./patches/CMakeLists.patch
+        run: git apply ./patches/zstd-dh/CMakeLists.patch
       - name: Build
         run: ./gradlew :app:assembleRelease
       - name: Upload AAR
