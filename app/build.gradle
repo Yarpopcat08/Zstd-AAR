@@ -25,7 +25,6 @@ android {
             externalNativeBuild {
                 cmake {
                     arguments "-DCMAKE_BUILD_TYPE=Release"
-                    cppFlags "-Bsymbolic -Wl, -shared -flto"
                 }
             }
         }
