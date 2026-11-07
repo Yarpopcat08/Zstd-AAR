@@ -1,8 +1,48 @@
 diff --git a/app/src/main/rnnoise4j-svc/native/CMakeLists.txt b/app/src/main/rnnoise4j-svc/native/CMakeLists.txt
-index 594cc2c..765cf27 100644
+index 594cc2c..0b33abb 100644
 --- a/app/src/main/rnnoise4j-svc/native/CMakeLists.txt
 +++ b/app/src/main/rnnoise4j-svc/native/CMakeLists.txt
-@@ -69,7 +69,7 @@ add_library(rnnoise4j SHARED
+@@ -56,12 +56,34 @@ file(WRITE "${RNNOISE_DATA}/src/rnnoise_data_little_dummy.c" "${MODEL_DATA_STRIN
+ 
+ include(FetchContent)
+ FetchContent_Declare(
+-        rnnoise
+-        GIT_REPOSITORY https://github.com/xiph/rnnoise.git
+-        GIT_TAG ${RNNOISE_VERSION}
+-        PATCH_COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_LIST_DIR}/cmake/rnnoise/CMakeLists.txt ${CMAKE_CURRENT_BINARY_DIR}/_deps/rnnoise-src/CMakeLists.txt && ${CMAKE_COMMAND} -E copy ${RNNOISE_DATA}/src/rnnoise_data_little.h ${CMAKE_CURRENT_BINARY_DIR}/_deps/rnnoise-src/src/rnnoise_data.h && ${CMAKE_COMMAND} -E copy ${RNNOISE_DATA}/src/rnnoise_data_little_dummy.c ${CMAKE_CURRENT_BINARY_DIR}/_deps/rnnoise-src/src/rnnoise_data.c
++    rnnoise
++    GIT_REPOSITORY https://github.com/xiph/rnnoise.git
++    GIT_TAG ${RNNOISE_VERSION}
+ )
+-FetchContent_MakeAvailable(rnnoise)
++
++FetchContent_GetProperties(rnnoise)
++if(NOT rnnoise_POPULATED)
++    FetchContent_Populate(rnnoise)
++    # rnnoise_SOURCE_DIR now exists; patch it deterministically.
++    configure_file(
++        "${CMAKE_CURRENT_LIST_DIR}/cmake/rnnoise/CMakeLists.txt"
++        "${rnnoise_SOURCE_DIR}/CMakeLists.txt"
++        COPYONLY
++    )
++    configure_file(
++        "${RNNOISE_DATA}/src/rnnoise_data_little.h"
++        "${rnnoise_SOURCE_DIR}/src/rnnoise_data.h"
++        COPYONLY
++    )
++    configure_file(
++        "${RNNOISE_DATA}/src/rnnoise_data_little_dummy.c"
++        "${rnnoise_SOURCE_DIR}/src/rnnoise_data.c"
++        COPYONLY
++    )
++endif()
++
++# Now rnnoise-static will be defined by the patched CMakeLists.
++add_subdirectory("${rnnoise_SOURCE_DIR}" "${rnnoise_BINARY_DIR}")
+ 
+ add_library(rnnoise4j SHARED
+         src/rnnoise.c
+@@ -69,7 +91,7 @@ add_library(rnnoise4j SHARED
  )
  
  target_include_directories(rnnoise4j PRIVATE
