@@ -51,3 +51,4 @@ index 37d9cdd..8604381 100644
  endif()
 -set (CMAKE_SHARED_LINKER_FLAGS "-fuse-ld=lld -Wl,-z,max-page-size=16384,-z,relro,-z,now")
 +set(CMAKE_SHARED_LINKER_FLAGS "-fuse-ld=lld -Wl,-z,max-page-size=16384,-z,relro,-z,now")
+\ No newline at end of file
