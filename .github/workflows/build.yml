@@ -50,7 +50,7 @@ jobs:
       - name: Rename for DH
         run: bash ./patches/zstd-dh/renamer.sh
       - name: Apply CMake patches
-        run: git apply ./patches/zstd-dh/CMakeLists.patch
+        run: git apply --verbose ./patches/zstd-dh/CMakeLists.patch
       - name: Build
         run: ./gradlew :app:assembleRelease
       - name: Upload AAR
