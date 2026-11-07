@@ -30,6 +30,8 @@ jobs:
         run: git apply --verbose ./patches/opus4j-svc/CMakeLists.patch
       - name: Apply rnnoise4j-svc CMake patches
         run: git apply --verbose ./patches/rnnoise4j-svc/CMakeLists.patch
+      - name: Apply lame4j-svc CMake patches
+        run: git apply --verbose ./patches/lame4j-svc/CMakeLists.patch
       - name: Build
         run: ./gradlew :app:assembleRelease
       - name: Upload AAR

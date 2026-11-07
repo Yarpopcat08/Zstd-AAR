@@ -7,3 +7,6 @@
 [submodule "app/src/main/rnnoise4j-svc"]
 	path = app/src/main/rnnoise4j-svc
 	url = https://github.com/henkelmax/rnnoise4j
+[submodule "app/src/main/lame4j-svc"]
+	path = app/src/main/lame4j-svc
+	url = https://github.com/henkelmax/lame4j
