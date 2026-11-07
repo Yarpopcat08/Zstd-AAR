@@ -10,3 +10,6 @@
 [submodule "app/src/main/lame4j-svc"]
 	path = app/src/main/lame4j-svc
 	url = https://github.com/henkelmax/lame4j
+[submodule "app/src/main/speex4j-svc"]
+	path = app/src/main/speex4j-svc
+	url = https://github.com/henkelmax/speex4j
