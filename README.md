@@ -17,5 +17,5 @@ To build an AAR with vanilla libraries locally you can simply clone the repo wit
 
 # Credits
 
-THis builder uses the libraries directly through submodules, so if you need to check their license, just navigate to the `app/src/main` directory.
+This builder uses the libraries directly through submodules, so if you need to check their license, just navigate to the `app/src/main` directory.
 
