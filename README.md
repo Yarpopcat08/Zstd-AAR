@@ -10,17 +10,16 @@ Currently supported libraries are:
 * SDL2Compat
 
 ## Getting the AAR
+There are 3 ways to get the AAR file:
 
-You can get the AAR files via three methods:
-
-1. **Releases:** Download the latest AAR files from [releases](https://github.com/Yarpopcat08/Zstd-AAR/releases).
+1. **Releases:** Download the build we marked as stable from [releases](https://github.com/Yarpopcat08/Zstd-AAR/releases) section.
 2. **Nightly.link:** Download the latest pre-built AAR files directly from [nightly.link](https://nightly.link/Yarpopcat08/Zstd-AAR/workflows/build/master/libraries-release.zip) without needing a GitHub account.
-3. **Automated builds:** Download the latest AAR files from [GitHub Actions](https://github.com/Yarpopcat08/Zstd-AAR/actions/), however you will need a GitHub account to download them. 
+3. **Automated builds:** Same as builds from nightly.link, except directly from [GitHub Actions](https://github.com/Yarpopcat08/Zstd-AAR/actions/). You will need a GitHub account to download them. 
 
 ## Building
 
 To build the AARs yourself it is recommended to fork this repo and enable CI workflows.
-To build an AAR with vanilla libraries locally you can simply clone the repo with submodules and run `./gradlew :app:assembleRelease`. If you wish to build patched libraries locally you may look at what `.github/workflows/build.yml` does.
+To build an AAR with vanilla libraries locally you can simply clone the repo with submodules and run `./gradlew :app:assembleRelease`. If you wish to build patched libraries locally you may look at what `./.github/workflows/build.yml` does.
 
 # Credits
 
