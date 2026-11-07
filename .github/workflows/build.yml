@@ -22,7 +22,7 @@ jobs:
         uses: gradle/actions/setup-gradle@v6
       - name: Apply ZSTD breaker patch
         run: pushd ./app/src/main/zstd; git apply --verbose --ignore-space-change --ignore-whitespace ../../../../patches/zstd-dh/break_droidcringe.patch; popd
-      - name: Rename for DH
+      - name: Rename ZSTD for DH
         run: bash ./patches/zstd-dh/renamer.sh
       - name: Apply ZSTD CMake patches
         run: git apply --verbose ./patches/zstd-dh/CMakeLists.patch
