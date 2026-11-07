@@ -1,0 +1,14 @@
+diff --git a/app/src/main/opus4j-svc/native/CMakeLists.txt b/app/src/main/opus4j-svc/native/CMakeLists.txt
+index 0000000..0000000 100644
+--- a/app/src/main/opus4j-svc/native/CMakeLists.txt
++++ b/app/src/main/opus4j-svc/native/CMakeLists.txt
+@@ -38,7 +38,7 @@ add_library(opus4j SHARED
+ )
+ 
+ target_include_directories(opus4j PRIVATE
+-        ${CMAKE_SOURCE_DIR}/include
++        ${CMAKE_CURRENT_LIST_DIR}/include
+         ${JNI_INCLUDE_DIRS}
+         ${opus_SOURCE_DIR}/include
+         ${CMAKE_BINARY_DIR}/jni_headers
+ )
