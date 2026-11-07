@@ -63,7 +63,45 @@ endif()
 
 # !!! A PART THAT NEEDS REWRITING: END !!!
 
-add_library(sqlitejdbc SHARED sqlite3-jdbc.c "${SQLITE_JDBC_SRC}/NativeDB.c")
+file(READ "${SQLITE_JDBC_SRC}/NativeDB.c" NATIVE_DB_SOURCE)
+
+set(NATIVE_DB_ORG_SRC "${CMAKE_CURRENT_BINARY_DIR}/NativeDB-org.c")
+string(REPLACE "JNI_OnLoad" "sqlitejdbc_org_onload" NATIVE_DB_ORG_SOURCE "${NATIVE_DB_SOURCE}")
+string(REPLACE "JNI_OnUnload" "sqlitejdbc_org_onunload" NATIVE_DB_ORG_SOURCE "${NATIVE_DB_ORG_SOURCE}")
+file(WRITE "${NATIVE_DB_ORG_SRC}" "${NATIVE_DB_ORG_SOURCE}")
+
+set(NATIVE_DB_DH_SRC "${CMAKE_CURRENT_BINARY_DIR}/NativeDB-dh-sqlite.c")
+string(REPLACE "Java_org_sqlite_core_NativeDB" "Java_dh_1sqlite_core_NativeDB" NATIVE_DB_DH_SOURCE "${NATIVE_DB_SOURCE}")
+string(REPLACE "\"org/sqlite/" "\"dh_sqlite/" NATIVE_DB_DH_SOURCE "${NATIVE_DB_DH_SOURCE}")
+string(REPLACE "JNI_OnLoad" "sqlitejdbc_dh_onload" NATIVE_DB_DH_SOURCE "${NATIVE_DB_DH_SOURCE}")
+string(REPLACE "JNI_OnUnload" "sqlitejdbc_dh_onunload" NATIVE_DB_DH_SOURCE "${NATIVE_DB_DH_SOURCE}")
+file(WRITE "${NATIVE_DB_DH_SRC}" "${NATIVE_DB_DH_SOURCE}")
+
+set(NATIVE_DB_DH_SYMBOLS
+    xFunc
+    xStep
+    xInverse
+    xValue
+    xFinal
+    xCompare
+    busyHandlerCallBack
+    change_busy_handler
+    free_collation_func
+    free_udf_func
+    reportProgress
+    updateProgress
+    copyLoop
+    update_hook
+    commit_hook
+    rollback_hook
+    clear_commit_listener)
+set(NATIVE_DB_DH_DEFINITIONS "")
+foreach(_symbol IN LISTS NATIVE_DB_DH_SYMBOLS)
+    list(APPEND NATIVE_DB_DH_DEFINITIONS "${_symbol}=sqlitejdbc_dh_${_symbol}")
+endforeach()
+set_source_files_properties("${NATIVE_DB_DH_SRC}" PROPERTIES COMPILE_DEFINITIONS "${NATIVE_DB_DH_DEFINITIONS}")
+
+add_library(sqlitejdbc SHARED sqlite3-jdbc.c sqlitejdbc-jni.c "${NATIVE_DB_ORG_SRC}" "${NATIVE_DB_DH_SRC}")
 target_include_directories(sqlitejdbc PRIVATE "${SQLITE_AMALGAMATION_DIR}" "${CMAKE_CURRENT_SOURCE_DIR}/include" "${SQLITE_JDBC_DIR}/src/main/ext")
 
 # Go brrr. Extracted from the real:tm: build script
