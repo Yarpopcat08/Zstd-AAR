@@ -25,7 +25,7 @@ jobs:
       - name: Rename ZSTD for DH
         run: bash ./patches/zstd-dh/renamer.sh
       - name: Apply ZSTD CMake patches
-        run: git apply --verbose ./patches/zstd-dh/CMakeLists.patch
+        run: git apply --verbose ./patches/zstd-dh/my_changes.patch
       - name: Build
         run: ./gradlew :app:assembleRelease
       - name: Upload AAR
