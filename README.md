@@ -8,7 +8,13 @@ Currently supported libraries are:
 * rnnoise4j-svc
 * speex4j-svc
 
-To download builds, you can go to [actions](https://github.com/Yarpopcat08/Zstd-AAR/actions/), however you will need a GitHub account to download from there. 
+## Getting the AAR
+
+You can get the AAR files via three methods:
+
+1. **Releases:** Download the latest AAR files from [releases](https://github.com/Yarpopcat08/Zstd-AAR/releases).
+2. **Nightly.link:** Download the latest pre-built AAR files directly from [nightly.link](https://nightly.link/Yarpopcat08/Zstd-AAR/workflows/build/master/libraries-release.zip) without needing a GitHub account.
+3. **Automated builds:** Download the latest AAR files from [GitHub Actions](https://github.com/Yarpopcat08/Zstd-AAR/actions/), however you will need a GitHub account to download them. 
 
 ## Building
 
