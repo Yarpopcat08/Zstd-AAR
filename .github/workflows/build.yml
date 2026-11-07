@@ -26,6 +26,8 @@ jobs:
         run: bash ./patches/zstd-dh/renamer.sh
       - name: Apply ZSTD CMake patches
         run: git apply --verbose ./patches/zstd-dh/CMakeLists.patch
+      - name: Apply opus4j-svc CMake patches
+        run: git apply --verbose ./patches/opus4j-svc/CMakeLists.patch
       - name: Build
         run: ./gradlew :app:assembleRelease
       - name: Upload AAR
