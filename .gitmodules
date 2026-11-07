@@ -16,3 +16,6 @@
 [submodule "app/src/main/sdl2compat"]
 	path = app/src/main/sdl2compat
 	url = https://github.com/libsdl-org/sdl2-compat
+[submodule "app/src/main/sqlite-jdbc"]
+	path = app/src/main/sqlite-jdbc
+	url = https://github.com/xerial/sqlite-jdbc

@@ -7,6 +7,7 @@ Currently supported libraries are:
 * opus4j-svc
 * rnnoise4j-svc
 * speex4j-svc
+* sqlite-jdbc
 * SDL2Compat
 
 ## Getting the AAR
