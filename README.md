@@ -7,6 +7,7 @@ Currently supported libraries are:
 * opus4j-svc
 * rnnoise4j-svc
 * speex4j-svc
+* SDL2Compat
 
 To download builds, you can go to [actions](https://github.com/Yarpopcat08/Zstd-AAR/actions/), however you will need a GitHub account to download from there. 
 
@@ -18,4 +19,6 @@ To build an AAR with vanilla libraries locally you can simply clone the repo wit
 # Credits
 
 This builder uses the libraries directly through submodules, so if you need to check their license, just navigate to the `app/src/main` directory.
+
+Additionally, this build holds SDL3 headers which were extracted from [SDL](https://github.com/libsdl-org/SDL) repository. They're licensed under the Zlib license.
 
