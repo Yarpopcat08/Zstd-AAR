@@ -1,5 +1,5 @@
 diff --git a/app/src/main/zstd/CMakeLists.txt b/app/src/main/zstd/CMakeLists.txt
-index 37d9cdd..8604381 100644
+index 37d9cdd..c1b0188 100644
 --- a/app/src/main/zstd/CMakeLists.txt
 +++ b/app/src/main/zstd/CMakeLists.txt
 @@ -1,18 +1,38 @@
@@ -7,10 +7,8 @@ index 37d9cdd..8604381 100644
  include(CheckCCompilerFlag)
  project(zstd-jni C ASM)
 -file(STRINGS "version" NATIVE_VERSION)
++
 +file(STRINGS "${CMAKE_CURRENT_LIST_DIR}/version" NATIVE_VERSION)
-+if (NOT NATIVE_VERSION)
-+    set(NATIVE_VERSION "1.5.7-12")
-+endif()
 +
  find_package(JNI)
 -include_directories("src/main/native" "src/main/native/common" "src/main/native/compress" "src/main/native/decompress" "src/main/native/dictBuilder" "src/main/native/legacy")
@@ -34,10 +32,8 @@ index 37d9cdd..8604381 100644
 +
 +file(GLOB_RECURSE SOURCES "${ZSTD_NATIVE_DIR}/*.c" "${ZSTD_NATIVE_DIR}/*.S")
 +
-+# huf_decompress_amd64.S is x86-64-only and cannot be assembled for arm64
-+list(FILTER SOURCES EXCLUDE REGEX "huf_decompress_amd64\\.S$")
-+
 +message(STATUS "ZSTD_NATIVE_DIR = ${ZSTD_NATIVE_DIR}")
++message(STATUS "ZSTD source count = ${SOURCES}")   # will print list
 +if (NOT SOURCES)
 +    message(FATAL_ERROR "No zstd sources found under ${ZSTD_NATIVE_DIR}")
 +endif()
