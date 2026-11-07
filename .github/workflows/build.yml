@@ -20,42 +20,17 @@ jobs:
           distribution: 'temurin'
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v6
-      - name: Apply breaker patch
-        run: pushd ./app/src/main/zstd; git apply --verbose --ignore-space-change --ignore-whitespace ../../../../patches/zstd-dh/break_droidcringe.patch; popd
-      - name: Build
-        run: ./gradlew :app:assembleRelease
-      - name: Upload AAR
-        uses: actions/upload-artifact@v4
-        with:
-          name: zstd-release
-          path: app/build/outputs/aar/app-release.aar
-
-  build-dh:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          submodules: recursive
-      - name: Set up JDK 11
-        uses: actions/setup-java@v5
-        with:
-          java-version: '11'
-          distribution: 'temurin'
-      - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v6
-      - name: Apply breaker patch
+      - name: Apply ZSTD breaker patch
         run: pushd ./app/src/main/zstd; git apply --verbose --ignore-space-change --ignore-whitespace ../../../../patches/zstd-dh/break_droidcringe.patch; popd
       - name: Rename for DH
         run: bash ./patches/zstd-dh/renamer.sh
-      - name: Apply CMake patches
+      - name: Apply ZSTD CMake patches
         run: git apply --verbose ./patches/zstd-dh/CMakeLists.patch
       - name: Build
         run: ./gradlew :app:assembleRelease
       - name: Upload AAR
         uses: actions/upload-artifact@v4
         with:
-          name: zstd-dh-release
+          name: libraries-release
           path: app/build/outputs/aar/app-release.aar
 
