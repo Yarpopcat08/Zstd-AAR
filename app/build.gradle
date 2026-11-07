@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-    namespace 'su.copium.zstd'
+    namespace 'su.copium.libraries'
     compileSdk {
         version = release(36) {
             minorApiLevel = 1
@@ -25,7 +25,7 @@ android {
             externalNativeBuild {
                 cmake {
                     arguments "-DCMAKE_BUILD_TYPE=Release"
-                    cppFlags "--version-script=./libzstd-jni.so.map -Wl,-Bsymbolic -Wl, -shared -flto"
+                    cppFlags "-Bsymbolic -Wl, -shared -flto"
                 }
             }
         }
