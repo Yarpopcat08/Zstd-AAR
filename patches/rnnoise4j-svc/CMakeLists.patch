@@ -1,0 +1,13 @@
+diff --git a/app/src/main/rnnoise4j-svc/native/CMakeLists.txt b/app/src/main/rnnoise4j-svc/native/CMakeLists.txt
+index 594cc2c..765cf27 100644
+--- a/app/src/main/rnnoise4j-svc/native/CMakeLists.txt
++++ b/app/src/main/rnnoise4j-svc/native/CMakeLists.txt
+@@ -69,7 +69,7 @@ add_library(rnnoise4j SHARED
+ )
+ 
+ target_include_directories(rnnoise4j PRIVATE
+-        ${CMAKE_SOURCE_DIR}/include
++        ${CMAKE_CURRENT_LIST_DIR}/include
+         ${JNI_INCLUDE_DIRS}
+         ${CMAKE_BINARY_DIR}/jni_headers
+         ${rnnoise_SOURCE_DIR}/include
