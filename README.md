@@ -2,7 +2,7 @@
 
 This repo hosts a simple builder of some native libraries for Android. Most of them are required for Minecraft mods and used in conjunction with the [NativesPlugin](https://github.com/MojoLauncher/NativesPlugin/) in MojoLauncher.  
 Currently supported libraries are:
-* zstd-jni (vanilla and a patched build for DistantHorizons)
+* zstd-jni (vanilla and DH-patched builds in the same AAR)
 * lame4j-svc
 * opus4j-svc
 * rnnoise4j-svc
@@ -21,13 +21,13 @@ Currently supported libraries are:
 There are 3 ways to get the AAR file:
 
 1. **Releases:** Download the build we marked as stable from [releases](https://github.com/Yarpopcat08/Zstd-AAR/releases) section.
-2. **Nightly.link:** Download the latest pre-built AAR files directly from [nightly.link](https://nightly.link/Yarpopcat08/Zstd-AAR/workflows/build/master/zstd-release.zip) ([DH variant](https://nightly.link/Yarpopcat08/Zstd-AAR/workflows/build/master/zstd-dh-release.zip)) without needing a GitHub account.
+2. **Nightly.link:** Download the latest pre-built AAR file directly from [nightly.link](https://nightly.link/Yarpopcat08/Zstd-AAR/workflows/build/master/libraries-release.zip) without needing a GitHub account. It contains both the vanilla and DH ZSTD libraries.
 3. **Automated builds:** Same as builds from nightly.link, except directly from [GitHub Actions](https://github.com/Yarpopcat08/Zstd-AAR/actions/). You will need a GitHub account to download them. 
 
 ## Building
 
 To build the AARs yourself it is recommended to fork this repo and enable CI workflows.
-To build an AAR locally, clone the repo with submodules, apply the patches listed in `./.github/workflows/build.yml` and run `./gradlew :app:assembleRelease`. Use the DH-specific patches only if you want the DistantHorizons variant.
+To build an AAR locally, clone the repo with submodules, apply the patches listed in `./.github/workflows/build.yml` and run `./gradlew :app:assembleRelease`. The DH preparation step generates `app/src/main/zstd-dh`, so the resulting AAR contains both ZSTD variants.
 
 ## AI usage disclosure
 
