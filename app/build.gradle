@@ -24,7 +24,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             externalNativeBuild {
                 cmake {
-                    arguments "-DCMAKE_BUILD_TYPE=Release"
+                    def extraArgs = project.findProperty("EXTRA_CMAKE_ARGS") ?: ""
+
+                    arguments "-DCMAKE_BUILD_TYPE=Release",
+                    *extraArgs.split("\\s+").toList()
                 }
             }
         }
