@@ -39,3 +39,5 @@ This builder uses the libraries directly through submodules, so if you need to c
 
 Additionally, this build holds SDL3 headers which were extracted from [SDL](https://github.com/libsdl-org/SDL) repository. They're licensed under the Zlib license.
 
+The AGENTS.md has been inspired by the one from Gitea.
+
