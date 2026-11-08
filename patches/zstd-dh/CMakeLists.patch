@@ -1,50 +1,12 @@
 diff --git a/app/src/main/zstd/CMakeLists.txt b/app/src/main/zstd/CMakeLists.txt
-index 37d9cdd..c1b0188 100644
 --- a/app/src/main/zstd/CMakeLists.txt
 +++ b/app/src/main/zstd/CMakeLists.txt
-@@ -1,18 +1,38 @@
- cmake_minimum_required(VERSION 3.5)
- include(CheckCCompilerFlag)
- project(zstd-jni C ASM)
--file(STRINGS "version" NATIVE_VERSION)
-+
-+file(STRINGS "${CMAKE_CURRENT_LIST_DIR}/version" NATIVE_VERSION)
-+
- find_package(JNI)
--include_directories("src/main/native" "src/main/native/common" "src/main/native/compress" "src/main/native/decompress" "src/main/native/dictBuilder" "src/main/native/legacy")
-+
-+# zstd sources live under app/src/main/zstd/src/main/native
-+set(ZSTD_NATIVE_DIR "${CMAKE_CURRENT_LIST_DIR}/src/main/native")
-+include_directories(
-+    "${ZSTD_NATIVE_DIR}"
-+    "${ZSTD_NATIVE_DIR}/common"
-+    "${ZSTD_NATIVE_DIR}/compress"
-+    "${ZSTD_NATIVE_DIR}/decompress"
-+    "${ZSTD_NATIVE_DIR}/dictBuilder"
-+    "${ZSTD_NATIVE_DIR}/legacy"
-+)
- if (JNI_FOUND)
-     include_directories(${JNI_INCLUDE_DIRS})
--endif (JNI_FOUND)
--file(GLOB_RECURSE SOURCES RELATIVE ${CMAKE_SOURCE_DIR} "src/*.[cS]")
+@@ -24,7 +24,7 @@
+     message(FATAL_ERROR "No zstd sources found under ${ZSTD_NATIVE_DIR}")
+ endif()
+ 
 -add_library(zstd-jni-${NATIVE_VERSION} SHARED ${SOURCES})
-+endif ()
-+
-+file(GLOB_RECURSE SOURCES "${ZSTD_NATIVE_DIR}/*.c" "${ZSTD_NATIVE_DIR}/*.S")
-+
-+message(STATUS "ZSTD_NATIVE_DIR = ${ZSTD_NATIVE_DIR}")
-+message(STATUS "ZSTD source count = ${SOURCES}")   # will print list
-+if (NOT SOURCES)
-+    message(FATAL_ERROR "No zstd sources found under ${ZSTD_NATIVE_DIR}")
-+endif()
-+
 +add_library(zstd-jni_dh-${NATIVE_VERSION} SHARED ${SOURCES})
  add_definitions("-DZSTD_MULTITHREAD=1")
  add_definitions("-DZSTD_LEGACY_SUPPORT=4")
  CHECK_C_COMPILER_FLAG(-Oz COMPILER_SUPPORTS_OZ)
- if(COMPILER_SUPPORTS_OZ)
-     add_definitions("-Oz")
- endif()
--set (CMAKE_SHARED_LINKER_FLAGS "-fuse-ld=lld -Wl,-z,max-page-size=16384,-z,relro,-z,now")
-+set(CMAKE_SHARED_LINKER_FLAGS "-fuse-ld=lld -Wl,-z,max-page-size=16384,-z,relro,-z,now")
-\ No newline at end of file
