@@ -22,13 +22,16 @@ jobs:
         uses: gradle/actions/setup-gradle@v6
       - name: Install CMake
         uses: lukka/get-cmake@latest
-      - name: Setup Ccache
+      - name: Setup CCache
         uses: jianmingyong/ccache-action@v1
         with:
           ccache-key-prefix: ccache_cache_
           max-size: 150M
-      - name: Apply ZSTD CMake patches
-        run: git apply --verbose ./patches/zstd/CMakeLists.patch
+      - name: Apply ZSTD patches
+        run: |
+          git apply --verbose ./patches/zstd/CMakeLists.patch
+          pushd ./app/src/main/zstd; git apply --verbose --ignore-space-change --ignore-whitespace ../../../../patches/zstd-dh/break_droidcringe.patch; popd
+            
       - name: Prepare ZSTD for DH
         run: bash ./patches/zstd-dh/prepare.sh
       - name: Apply rnnoise4j-svc CMake patches

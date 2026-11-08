@@ -15,7 +15,3 @@ cp -a "$SRC_DIR/src/main/native" "$DST_DIR/src/main/native"
 sed -i 's/zstd-jni-${NATIVE_VERSION}/zstd-jni_dh-${NATIVE_VERSION}/' "$DST_DIR/CMakeLists.txt"
 
 bash "$REPO_ROOT/patches/zstd-dh/renamer.sh" "$DST_DIR/src/main/native"
-
-pushd "$DST_DIR" >/dev/null
-patch --forward -p1 < "$REPO_ROOT/patches/zstd-dh/break_droidcringe.patch"
-popd >/dev/null
