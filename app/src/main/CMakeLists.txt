@@ -3,6 +3,7 @@ project("Libraries")
 
 add_subdirectory(zstd)
 add_subdirectory(opus4j-svc/native)
+target_include_directories(opus4j PRIVATE "${CMAKE_CURRENT_LIST_DIR}/opus4j-svc/native/include")
 add_subdirectory(rnnoise4j-svc/native)
 add_subdirectory(lame4j-svc/native)
 add_subdirectory(speex4j-svc/native)
