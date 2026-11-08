@@ -10,16 +10,17 @@ JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *vm, void *reserved)
     JNIEnv *env = 0;
     jint result = JNI_ERR;
 
-    if (JNI_OK != (*vm)->GetEnv(vm, (void **)&env, JNI_VERSION_1_2))
+    if ((*vm)->GetEnv(vm, (void **)&env, JNI_VERSION_1_2) != JNI_OK)
         return JNI_ERR;
 
-    if (JNI_VERSION_1_2 == sqlitejdbc_org_onload(vm, reserved))
+    // Check if both bindings are working correctly
+    if (sqlitejdbc_org_onload(vm, reserved) == JNI_VERSION_1_2)
         result = JNI_VERSION_1_2;
 
     if ((*env)->ExceptionCheck(env))
         (*env)->ExceptionClear(env);
 
-    if (JNI_VERSION_1_2 == sqlitejdbc_dh_onload(vm, reserved))
+    if (sqlitejdbc_dh_onload(vm, reserved) == JNI_VERSION_1_2)
         result = JNI_VERSION_1_2;
 
     if ((*env)->ExceptionCheck(env))
