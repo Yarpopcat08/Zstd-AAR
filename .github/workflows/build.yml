@@ -20,6 +20,13 @@ jobs:
           distribution: 'temurin'
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v6
+      - name: Install CMake
+        uses: lukka/get-cmake@latest
+      - name: Setup Ccache
+        uses: jianmingyong/ccache-action@v1
+        with:
+          ccache-key-prefix: ccache_cache_
+          max-size: 150M
       - name: Apply ZSTD CMake patches
         run: git apply --verbose ./patches/zstd/CMakeLists.patch
       - name: Prepare ZSTD for DH
@@ -31,7 +38,7 @@ jobs:
       - name: Apply speex4j-svc CMake patches
         run: git apply --verbose ./patches/speex4j-svc/CMakeLists.patch
       - name: Build
-        run: ./gradlew :app:assembleRelease
+        run: gradle :app:assembleRelease -PEXTRA_CMAKE_ARGS="-DCMAKE_C_COMPILER_LAUNCHER=ccache -DCMAKE_CXX_COMPILER_LAUNCHER=ccache"
       - name: Upload AAR
         uses: actions/upload-artifact@v4
         with:
