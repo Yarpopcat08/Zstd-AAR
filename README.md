@@ -1,6 +1,6 @@
 # Natives AAR builder
 
-This repo hosts a simple builder of some native libraries for Android. Most of them are required for Minecraft mods and used in conjuction with the [NativesPlugin](https://github.com/MojoLauncher/NativesPlugin/) in MojoLauncher.  
+This repo hosts a simple builder of some native libraries for Android. Most of them are required for Minecraft mods and used in conjunction with the [NativesPlugin](https://github.com/MojoLauncher/NativesPlugin/) in MojoLauncher.  
 Currently supported libraries are:
 * zstd-jni (+ a patch to build it for DistantHorizons)
 * lame4j-svc
