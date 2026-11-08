@@ -21,7 +21,7 @@ Currently supported libraries are:
 There are 3 ways to get the AAR file:
 
 1. **Releases:** Download the build we marked as stable from [releases](https://github.com/Yarpopcat08/Zstd-AAR/releases) section.
-2. **Nightly.link:** Download the latest pre-built AAR file directly from [nightly.link](https://nightly.link/Yarpopcat08/Zstd-AAR/workflows/build/master/libraries-release.zip) without needing a GitHub account. It contains both the vanilla and DH ZSTD libraries.
+2. **Nightly.link:** Download the latest pre-built AAR file directly from [nightly.link](https://nightly.link/Yarpopcat08/Zstd-AAR/workflows/build/master/libraries-release.zip) without needing a GitHub account.
 3. **Automated builds:** Same as builds from nightly.link, except directly from [GitHub Actions](https://github.com/Yarpopcat08/Zstd-AAR/actions/). You will need a GitHub account to download them. 
 
 ## Building
