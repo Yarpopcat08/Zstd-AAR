@@ -26,10 +26,6 @@ jobs:
         uses: gradle/actions/setup-gradle@v6
       - name: Install CMake
         uses: lukka/get-cmake@latest
-      - name: Preload NDK
-        uses: nttld/setup-ndk@v1
-        with:
-          ndk-version: r28c
       - name: Setup CCache
         uses: jianmingyong/ccache-action@v1
         with:
