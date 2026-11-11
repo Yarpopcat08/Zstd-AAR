@@ -43,7 +43,7 @@ android {
         cmake {
             path "src/main/CMakeLists.txt"
             // force version for CI runner
-            version "4.4.5"
+            version "3.26.0"
         }
     }
 }
