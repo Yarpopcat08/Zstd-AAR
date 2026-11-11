@@ -25,7 +25,7 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v6
       - name: Install CMake
-        uses: lukka/get-cmake@latest
+        uses: lukka/get-cmake@v3.26.0
       - name: Setup CCache
         uses: jianmingyong/ccache-action@v1
         with:
