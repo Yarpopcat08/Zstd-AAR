@@ -10,6 +10,9 @@ android {
         }
     }
 
+    // forcing NDK version to the one present in github CI runner to skip redownloading NDK on each run
+    ndkVersion "30.0.16248370" 
+
     defaultConfig {
         minSdk 21
         targetSdk 36
@@ -39,6 +42,8 @@ android {
     externalNativeBuild {
         cmake {
             path "src/main/CMakeLists.txt"
+            // force version for CI runner
+            version "3.26.0"
         }
     }
 }
